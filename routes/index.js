@@ -10,6 +10,9 @@ const consultation = require('../app/Konsultasi/controller');
 router.get('/', admin.viewLogin);
 router.post('/', admin.actionLogin);
 
+//SignUp superadmin
+router.post('/signup', admin.actionSignUp);
+
 // Dashboard
 router.get('/dashboard', home.HomeDashboard);
 
