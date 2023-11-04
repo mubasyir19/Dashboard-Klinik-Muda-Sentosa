@@ -6,11 +6,16 @@ module.exports = {
   // Account page
   AccountPage: async (req, res) => {
     try {
+      const alertMessage = req.flash('alertMessage');
+      const alertStatus = req.flash('alertStatus');
+      const alert = { message: alertMessage, status: alertStatus };
+
       const account = await Account.findAll();
 
       res.render('admin/account/view_account', {
         route: 'Account',
         account,
+        alert,
       });
     } catch (error) {
       console.log(error);
@@ -26,6 +31,7 @@ module.exports = {
       console.log(error);
     }
   },
+  // Add Account action
   actionAddAccount: async (req, res) => {
     try {
       const { name, username, role, password } = req.body;
@@ -43,14 +49,14 @@ module.exports = {
         password: hash,
       });
 
-      // req.flash('alertMessage', 'Berhasil tambah akun');
-      // req.flash('alertStatus', 'success');
+      req.flash('alertMessage', 'Berhasil tambah akun');
+      req.flash('alertStatus', 'success');
 
       res.redirect('/account');
     } catch (error) {
       console.log(error);
-      // req.flash('alertMessage', `${error.message}`);
-      // req.flash('alertStatus', 'danger');
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
       res.redirect('/kategori');
     }
   },
