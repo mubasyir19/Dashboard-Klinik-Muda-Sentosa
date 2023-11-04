@@ -6,8 +6,11 @@ module.exports = {
   // Account page
   AccountPage: async (req, res) => {
     try {
+      const account = await Account.findAll();
+
       res.render('admin/account/view_account', {
         route: 'Account',
+        account,
       });
     } catch (error) {
       console.log(error);
