@@ -19,6 +19,7 @@ router.get('/dashboard', home.HomeDashboard);
 // Account
 router.get('/account', account.AccountPage);
 router.get('/account/add', account.addAccountPage);
+router.post('/account/add', account.actionAddAccount);
 
 // Article
 router.get('/article', article.articlePage);
