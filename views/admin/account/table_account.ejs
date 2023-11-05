@@ -10,158 +10,39 @@
     </tr>
   </thead>
   <tbody>
-    <!-- <%# for(let i = 0; i < kls.length; i++) { %>
+    <% for(let i = 0; i < account.length; i++) { %>
     <tr>
-      <td><%#= i + 1 %></td>
-      <td><%#= kls[i].nama %></td>
+      <td><%= i + 1 %></td>
+      <td><%= account[i].name %></td>
+      <td><%= account[i].username %></td>
+      <td><%= account[i].role %></td>
       <td>
-        <form action="/kelas/hapus/<%#= kls[i].id %>?_method=DELETE" method="post">
-          <a href="/kelas/edit/<%#= kls[i].id %>" class="btn btn-info btn-sm">
-            <i class="fas fa-pencil-alt"></i>
-            Ubah
-          </a>
-          <a
-            href="javascript:void()"
-            type="button"
-            class="btn btn-danger btn-sm button-delete"
-            data-id="<%#= kls[i].id %>"
-          >
-            <i class="fas fa-trash-alt"></i>
-            Hapus
-          </a>
+        <% if (account[i].status === 'Aktif') { %>
+        <span class="badge badge-success"> <%= account[i].status %> </span>
+        <% } else {%>
+        <span class="badge badge-danger"> <%= account[i].status %> </span>
+        <% } %>
+      </td>
+      <td class="d-flex">
+        <form action="/account/status/<%= account[i].id %>?_method=PUT" method="post" style="display: inline-block">
+          <button class="btn btn-primary btn-sm">
+            <i class="fas fa-folder mr-1"></i>
+            <% if(account[i].status === 'Non-Aktif') { %> Aktifkan <% } else { %> Non-Aktifkan <% } %>
+          </button>
         </form>
+        <!-- <form action="/account/delete/<%#= kategori[i].id %>?_method=DELETE" method="post" class="ml-1"> -->
+        <a
+          href="javascript:void()"
+          type="button"
+          class="btn btn-danger btn-sm ml-1 button-delete"
+          data-id="<%= account[i].id %>"
+        >
+          <i class="fas fa-trash-alt"></i>
+          Hapus
+        </a>
+        <!-- </form> -->
       </td>
     </tr>
-    <%# } %> -->
-    <tr>
-      <td>1</td>
-      <td>Mahdy M</td>
-      <td>mubasyir19</td>
-      <td>SuperAdmin</td>
-      <td>
-        <span class="badge badge-success"> Aktif </span>
-      </td>
-      <td>
-        <form action="/kelas/hapus/<%#= kls[i].id %>?_method=DELETE" method="post">
-          <a href="/kelas/edit/<%#= kls[i].id %>" class="btn btn-info btn-sm">
-            <i class="fas fa-pencil-alt"></i>
-            Ubah
-          </a>
-          <a
-            href="javascript:void()"
-            type="button"
-            class="btn btn-danger btn-sm button-delete"
-            data-id="<%#= kls[i].id %>"
-          >
-            <i class="fas fa-trash-alt"></i>
-            Hapus
-          </a>
-        </form>
-      </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Fulan 1</td>
-      <td>fulan1</td>
-      <td>Admin</td>
-      <td>
-        <span class="badge badge-success"> Aktif </span>
-      </td>
-      <td>
-        <form action="/kelas/hapus/<%#= kls[i].id %>?_method=DELETE" method="post">
-          <a href="/kelas/edit/<%#= kls[i].id %>" class="btn btn-info btn-sm">
-            <i class="fas fa-pencil-alt"></i>
-            Ubah
-          </a>
-          <a
-            href="javascript:void()"
-            type="button"
-            class="btn btn-danger btn-sm button-delete"
-            data-id="<%#= kls[i].id %>"
-          >
-            <i class="fas fa-trash-alt"></i>
-            Hapus
-          </a>
-        </form>
-      </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Fulan 2</td>
-      <td>fulan2</td>
-      <td>Admin</td>
-      <td>
-        <span class="badge badge-danger"> Non-Aktif </span>
-      </td>
-      <td>
-        <form action="/kelas/hapus/<%#= kls[i].id %>?_method=DELETE" method="post">
-          <a href="/kelas/edit/<%#= kls[i].id %>" class="btn btn-info btn-sm">
-            <i class="fas fa-pencil-alt"></i>
-            Ubah
-          </a>
-          <a
-            href="javascript:void()"
-            type="button"
-            class="btn btn-danger btn-sm button-delete"
-            data-id="<%#= kls[i].id %>"
-          >
-            <i class="fas fa-trash-alt"></i>
-            Hapus
-          </a>
-        </form>
-      </td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Dokter 1</td>
-      <td>dokter1</td>
-      <td>Dokter</td>
-      <td>
-        <span class="badge badge-success"> Aktif </span>
-      </td>
-      <td>
-        <form action="/kelas/hapus/<%#= kls[i].id %>?_method=DELETE" method="post">
-          <a href="/kelas/edit/<%#= kls[i].id %>" class="btn btn-info btn-sm">
-            <i class="fas fa-pencil-alt"></i>
-            Ubah
-          </a>
-          <a
-            href="javascript:void()"
-            type="button"
-            class="btn btn-danger btn-sm button-delete"
-            data-id="<%#= kls[i].id %>"
-          >
-            <i class="fas fa-trash-alt"></i>
-            Hapus
-          </a>
-        </form>
-      </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>Dokter 2</td>
-      <td>dokter2</td>
-      <td>Dokter</td>
-      <td>
-        <span class="badge badge-success"> Aktif </span>
-      </td>
-      <td>
-        <form action="/kelas/hapus/<%#= kls[i].id %>?_method=DELETE" method="post">
-          <a href="/kelas/edit/<%#= kls[i].id %>" class="btn btn-info btn-sm">
-            <i class="fas fa-pencil-alt"></i>
-            Ubah
-          </a>
-          <a
-            href="javascript:void()"
-            type="button"
-            class="btn btn-danger btn-sm button-delete"
-            data-id="<%#= kls[i].id %>"
-          >
-            <i class="fas fa-trash-alt"></i>
-            Hapus
-          </a>
-        </form>
-      </td>
-    </tr>
+    <% } %>
   </tbody>
 </table>

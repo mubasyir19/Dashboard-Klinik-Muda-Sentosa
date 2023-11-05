@@ -1,3 +1,6 @@
+const { Account } = require('../../db/models');
+const bcrypt = require('bcryptjs');
+
 module.exports = {
   viewLogin: async (req, res) => {
     try {
@@ -50,6 +53,32 @@ module.exports = {
         req.flash('alertStatus', 'danger');
         res.redirect('/');
       }
+    } catch (error) {
+      // Resopnse Error
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/login');
+    }
+  },
+  // SignUp
+  actionSignUp: async (req, res) => {
+    try {
+      const { name, username, role, password } = req.body;
+
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(password, salt);
+
+      const result = await Account.create({
+        name,
+        username,
+        role,
+        password: hash,
+      });
+
+      res.status(201).json({
+        message: 'Success SignUp',
+        result: result,
+      });
     } catch (error) {
       console.log(error);
     }

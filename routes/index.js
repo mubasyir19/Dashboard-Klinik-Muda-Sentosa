@@ -10,12 +10,18 @@ const consultation = require('../app/Konsultasi/controller');
 router.get('/', admin.viewLogin);
 router.post('/', admin.actionLogin);
 
+//SignUp superadmin
+router.post('/signup', admin.actionSignUp);
+
 // Dashboard
 router.get('/dashboard', home.HomeDashboard);
 
 // Account
 router.get('/account', account.AccountPage);
 router.get('/account/add', account.addAccountPage);
+router.post('/account/add', account.actionAddAccount);
+router.put('/account/status/:id', account.actionStatus);
+router.delete('/account/delete', account.actionDelete);
 
 // Article
 router.get('/article', article.articlePage);
