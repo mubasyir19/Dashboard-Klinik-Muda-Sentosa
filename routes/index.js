@@ -26,7 +26,11 @@ router.delete('/account/delete', account.actionDelete);
 // Article
 router.get('/article', article.articlePage);
 router.get('/article/add', article.addArticlePage);
-router.get('/article/category/add', article.AddArticleCategoryPage);
+router.get('/article/category/add', article.addCategoryPage);
+router.post('/article/category/add', article.addCategory);
+router.get('/article/category/edit/:id', article.editCategoryPage);
+router.put('/article/category/edit/:id', article.editCategory);
+router.delete('/article/category/delete', article.deleteCategory);
 
 // Consultations
 router.get('/consultation', consultation.ConsultationPage);

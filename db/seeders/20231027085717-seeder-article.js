@@ -14,6 +14,8 @@ module.exports = {
           content:
             'Telah berlangsung kegiatan agustusan yang bertempat di Yayayasan Karya Muda Sentosa pada tanggal 27 Agustus 2023, tidak hanya cek kesehatan saja, disini terdapat bazar yang memamerkan produk asli warga yang dijamin kehalalannya',
           adminId: '7b708523-1805-4fb5-99ab-b85310abaf19',
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       ],
       {}
