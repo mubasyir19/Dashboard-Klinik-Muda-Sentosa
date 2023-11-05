@@ -23,12 +23,14 @@
         <span class="badge badge-danger"> <%= account[i].status %> </span>
         <% } %>
       </td>
-      <td>
-        <form action="/kategori/hapus/<%#= kategori[i].id %>?_method=DELETE" method="post">
-          <a href="/kategori/edit/<%#= kategori[i].id %>" class="btn btn-info btn-sm">
-            <i class="fas fa-pencil-alt"></i>
-            Ubah
-          </a>
+      <td class="d-flex">
+        <form action="/account/status/<%= account[i].id %>?_method=PUT" method="post" style="display: inline-block">
+          <button class="btn btn-primary btn-sm">
+            <i class="fas fa-folder mr-1"></i>
+            <% if(account[i].status === 'Non-Aktif') { %> Aktifkan <% } else { %> Non-Aktifkan <% } %>
+          </button>
+        </form>
+        <form action="/kategori/hapus/<%#= kategori[i].id %>?_method=DELETE" method="post" class="ml-1">
           <a
             href="javascript:void()"
             type="button"

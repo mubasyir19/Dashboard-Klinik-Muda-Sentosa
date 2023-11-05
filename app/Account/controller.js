@@ -57,7 +57,32 @@ module.exports = {
       console.log(error);
       req.flash('alertMessage', `${error.message}`);
       req.flash('alertStatus', 'danger');
-      res.redirect('/kategori');
+      res.redirect('/account');
+    }
+  },
+  actionStatus: async (req, res) => {
+    try {
+      const { id } = req.params;
+      // const { status } = req.query;
+
+      const findAccount = await Account.findOne({
+        where: {
+          id: id,
+        },
+      });
+
+      let status = findAccount.status === 'Aktif' ? 'Non-Aktif' : 'Aktif';
+
+      await findAccount.update({ status: status });
+
+      req.flash('alertMessage', 'Berhasil ubah status');
+      req.flash('alertStatus', 'success');
+      res.redirect('/account');
+    } catch (error) {
+      console.log(error);
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/account');
     }
   },
 };
