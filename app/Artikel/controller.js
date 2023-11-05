@@ -8,7 +8,7 @@ module.exports = {
       console.log(error);
     }
   },
-  AddaArticleCategoryPage: async (req, res) => {
+  AddArticleCategoryPage: async (req, res) => {
     try {
       res.render('admin/artikel/create_category_article', {
         route: 'Article',
