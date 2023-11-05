@@ -21,6 +21,7 @@ router.get('/account', account.AccountPage);
 router.get('/account/add', account.addAccountPage);
 router.post('/account/add', account.actionAddAccount);
 router.put('/account/status/:id', account.actionStatus);
+router.delete('/account/delete', account.actionDelete);
 
 // Article
 router.get('/article', article.articlePage);

@@ -85,4 +85,26 @@ module.exports = {
       res.redirect('/account');
     }
   },
+  actionDelete: async (req, res) => {
+    try {
+      const { id } = req.body;
+
+      const findAccount = await Account.findOne({
+        where: {
+          id: id,
+        },
+      });
+
+      await findAccount.destroy();
+
+      req.flash('alertMessage', 'Berhasil hapus akun');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/account');
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/account');
+    }
+  },
 };

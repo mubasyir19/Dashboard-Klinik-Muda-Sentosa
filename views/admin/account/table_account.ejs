@@ -30,21 +30,17 @@
             <% if(account[i].status === 'Non-Aktif') { %> Aktifkan <% } else { %> Non-Aktifkan <% } %>
           </button>
         </form>
-        <form action="/kategori/hapus/<%#= kategori[i].id %>?_method=DELETE" method="post" class="ml-1">
-          <a
-            href="javascript:void()"
-            type="button"
-            class="btn btn-danger btn-sm button-delete"
-            data-id="<%= account[i].id %>"
-          >
-            <i class="fas fa-trash-alt"></i>
-            Hapus
-          </a>
-          <!-- <button class="btn btn-danger btn-sm">
-              <i class="fas fa-trash-alt"></i>
-              Hapus
-            </button> -->
-        </form>
+        <!-- <form action="/account/delete/<%#= kategori[i].id %>?_method=DELETE" method="post" class="ml-1"> -->
+        <a
+          href="javascript:void()"
+          type="button"
+          class="btn btn-danger btn-sm ml-1 button-delete"
+          data-id="<%= account[i].id %>"
+        >
+          <i class="fas fa-trash-alt"></i>
+          Hapus
+        </a>
+        <!-- </form> -->
       </td>
     </tr>
     <% } %>

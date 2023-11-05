@@ -55,9 +55,17 @@
   <!-- /.content -->
 </div>
 
-<!-- Validasi Hapus -->
-<%#- include("./validasi.ejs") %>
+<!-- Validation Delete -->
+<%- include("./validation.ejs") %>
 <!--   Footer   -->
 <%- include('../../partials/footer.ejs') %>
 <!--   Core JS Files   -->
 <%- include('../../partials/js.ejs') %>
+
+<script>
+  $('#example1').on('click', '.button-delete', function () {
+    let id = $(this).data('id');
+    $('#delete-modal').modal('show');
+    $('.id').val(id);
+  });
+</script>
