@@ -30,7 +30,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="/article/add" method="post">
+                <form action="/article/add" method="post" enctype="multipart/form-data">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Pilih Kategori</label>
@@ -47,11 +47,11 @@
                     </div>
                     <div class="form-group">
                       <label for="title">Masukkan Judul</label>
-                      <input type="password" name="title" class="form-control" id="title" placeholder="Masukkan Judul" required>
+                      <input type="text" name="title" class="form-control" id="title" placeholder="Masukkan Judul" required>
                     </div>
                     <div class="form-group">
                       <label for="title">Masukkan Konten</label>
-                      <textarea id="summernote">
+                      <textarea id="summernote" name="content">
                         Add your content here
                       </textarea>
                     </div>

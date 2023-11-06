@@ -149,4 +149,29 @@ module.exports = {
       res.redirect('/article');
     }
   },
+  addArticle: async (req, res) => {
+    console.log('Files: ', req.file);
+    try {
+      const { categoryId, title, content } = req.body;
+      const articleId = uuid.v4();
+
+      await Article.create({
+        id: articleId,
+        categoryId,
+        title,
+        content,
+        image: `images/${req.file.filename}`,
+      });
+
+      req.flash('alertMessage', 'Berhasil tambah artikel');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/article');
+    } catch (error) {
+      console.log(error);
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/article');
+    }
+  },
 };
