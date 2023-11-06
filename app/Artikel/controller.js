@@ -1,4 +1,4 @@
-const { Article, Category } = require('../../db/models');
+const { Article, Category, Account } = require('../../db/models');
 const uuid = require('uuid');
 
 module.exports = {
@@ -9,10 +9,23 @@ module.exports = {
       const alert = { message: alertMessage, status: alertStatus };
 
       const getAllCategory = await Category.findAll();
+      const getAllArticle = await Article.findAll({
+        include: [
+          {
+            model: Category,
+            attributes: ['id', 'name'],
+          },
+          {
+            model: Account,
+            attributes: ['id', 'name', 'role'],
+          },
+        ],
+      });
 
       res.render('admin/artikel/view_article', {
         route: 'Article',
         getAllCategory,
+        getAllArticle,
         alert,
       });
     } catch (error) {
@@ -123,8 +136,11 @@ module.exports = {
   },
   addArticlePage: async (req, res) => {
     try {
+      const getCategory = await Category.findAll();
+
       res.render('admin/artikel/create_article', {
         route: 'Article',
+        getCategory,
       });
     } catch (error) {
       console.log(error);

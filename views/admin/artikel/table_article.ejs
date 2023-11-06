@@ -9,23 +9,27 @@
     </tr>
   </thead>
   <tbody>
-    <!-- <%# for(let i = 0; i < kls.length; i++) { %>
+    <% for(let i = 0; i < getAllArticle.length; i++) { %>
     <tr>
-      <td><%#= i + 1 %></td>
-      <td><%#= kls[i].nama %></td>
-      <td><%#= kls[i].nama %></td>
-      <td><%#= kls[i].nama %></td>
+      <td><%= i + 1 %></td>
+      <td><%= getAllArticle[i]?.Category?.name %></td>
+      <td><%= getAllArticle[i].title %></td>
+      <td><%= getAllArticle[i]?.Account?.name %></td>
       <td>
-        <form action="/kelas/hapus/<%#= kls[i].id %>?_method=DELETE" method="post">
-          <a href="/kelas/edit/<%#= kls[i].id %>" class="btn btn-info btn-sm">
-            <i class="fas fa-pencil-alt"></i>
-            Ubah
-          </a>
+        <a href="/kelas/edit/<%= getAllArticle[i].id %>" class="btn btn-info btn-sm">
+          <i class="fas fa-pencil-alt"></i>
+          Ubah
+        </a>
+        <a href="/kelas/edit/<%= getAllArticle[i].id %>" class="btn btn-success btn-sm">
+          <i class="fa fa-clipboard"></i>
+          Detail
+        </a>
+        <form action="/kelas/hapus/<%= getAllArticle[i].id %>?_method=DELETE" method="post">
           <a
             href="javascript:void()"
             type="button"
             class="btn btn-danger btn-sm button-delete"
-            data-id="<%#= kls[i].id %>"
+            data-id="<%= getAllArticle[i].id %>"
           >
             <i class="fas fa-trash-alt"></i>
             Hapus
@@ -33,7 +37,7 @@
         </form>
       </td>
     </tr>
-    <%# } %> -->
+    <% } %>
     <!-- <tr>
       <td>1</td>
       <td>Mahdy M</td>
