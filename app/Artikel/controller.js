@@ -1,5 +1,6 @@
 const { Article, Category, Account } = require('../../db/models');
 const uuid = require('uuid');
+const fs = require('fs');
 
 module.exports = {
   articlePage: async (req, res) => {
@@ -238,6 +239,39 @@ module.exports = {
       }
 
       req.flash('alertMessage', 'Berhasil update artikel');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/article');
+    } catch (error) {
+      console.log(error);
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/article');
+    }
+  },
+  actionDeleteArticle: async (req, res) => {
+    try {
+      const { id } = req.body;
+
+      const getArticle = await Article.findOne({
+        where: {
+          id: id,
+        },
+      });
+
+      if (!getArticle) {
+        req.flash('alertMessage', 'Artikel tidak ditemukan');
+        req.flash('alertStatus', 'danger');
+        return res.redirect('/article');
+      }
+
+      if (getArticle.image) {
+        fs.unlinkSync(`public/${getArticle.image}`);
+      }
+
+      await getArticle.destroy();
+
+      req.flash('alertMessage', 'Berhasil hapus artikel');
       req.flash('alertStatus', 'success');
 
       res.redirect('/article');

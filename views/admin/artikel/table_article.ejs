@@ -1,4 +1,4 @@
-<table id="example1" class="table table-bordered table-hover">
+<table id="example1" class="table table-bordered table-hover table-article">
   <thead>
     <tr>
       <th>No.</th>
@@ -24,17 +24,17 @@
           <i class="fa fa-clipboard"></i>
           Detail
         </a>
-        <form action="/kelas/hapus/<%= getAllArticle[i].id %>?_method=DELETE" method="post">
-          <a
-            href="javascript:void()"
-            type="button"
-            class="btn btn-danger btn-sm button-delete"
-            data-id="<%= getAllArticle[i].id %>"
-          >
-            <i class="fas fa-trash-alt"></i>
-            Hapus
-          </a>
-        </form>
+        <!-- <form action="/article/delete/<%#= getAllArticle[i].id %>?_method=DELETE" method="post"> -->
+        <a
+          href="javascript:void()"
+          type="button"
+          class="btn btn-danger btn-sm button-delete-article"
+          data-id="<%= getAllArticle[i].id %>"
+        >
+          <i class="fas fa-trash-alt"></i>
+          Hapus
+        </a>
+        <!-- </form> -->
       </td>
     </tr>
     <% } %>
