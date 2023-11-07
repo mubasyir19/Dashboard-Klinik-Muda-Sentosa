@@ -37,6 +37,7 @@ router.delete('/article/category/delete', article.deleteCategory);
 // Article Action
 router.get('/article/add', article.addArticlePage);
 router.post('/article/add', uploadSingle, article.addArticle);
+router.get('/article/detail/:id', article.detailArticlePage);
 
 // Consultations
 router.get('/consultation', consultation.ConsultationPage);

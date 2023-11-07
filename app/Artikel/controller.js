@@ -160,13 +160,50 @@ module.exports = {
         categoryId,
         title,
         content,
-        image: `images/${req.file.filename}`,
+        image: `uploads/${req.file.filename}`,
       });
 
       req.flash('alertMessage', 'Berhasil tambah artikel');
       req.flash('alertStatus', 'success');
 
       res.redirect('/article');
+    } catch (error) {
+      console.log(error);
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/article');
+    }
+  },
+  detailArticlePage: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const getCategory = await Category.findAll();
+      const getArticle = await Article.findOne(
+        {
+          where: {
+            id: id,
+          },
+        },
+        {
+          include: [
+            {
+              model: Category,
+              attributes: ['id', 'name'],
+            },
+            {
+              model: Account,
+              attributes: ['id', 'name', 'role'],
+            },
+          ],
+        }
+      );
+
+      res.render('admin/artikel/edit_article', {
+        route: 'Article',
+        getArticle,
+        getCategory,
+      });
     } catch (error) {
       console.log(error);
       req.flash('alertMessage', `${error.message}`);
