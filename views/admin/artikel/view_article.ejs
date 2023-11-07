@@ -70,8 +70,10 @@
   <!-- /.content -->
 </div>
 
-<!-- Validasi Hapus -->
+<!-- Validasi Hapus Category -->
 <%- include("./validation_category.ejs") %>
+<!-- Validasi Hapus article -->
+<%- include("./validation_article.ejs") %>
 <!--   Footer   -->
 <%- include('../../partials/footer.ejs') %>
 <!--   Core JS Files   -->
@@ -81,6 +83,13 @@
   $('.table-category').on('click', '.button-delete-category', function () {
     let id = $(this).data('id');
     $('#delete-modal-category').modal('show');
+    $('.id').val(id);
+  });
+</script>
+<script>
+  $('.table-article').on('click', '.button-delete-article', function () {
+    let id = $(this).data('id');
+    $('#delete-modal-article').modal('show');
     $('.id').val(id);
   });
 </script>

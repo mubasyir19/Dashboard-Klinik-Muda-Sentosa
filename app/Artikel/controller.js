@@ -1,5 +1,6 @@
-const { Article, Category } = require('../../db/models');
+const { Article, Category, Account } = require('../../db/models');
 const uuid = require('uuid');
+const fs = require('fs');
 
 module.exports = {
   articlePage: async (req, res) => {
@@ -9,10 +10,23 @@ module.exports = {
       const alert = { message: alertMessage, status: alertStatus };
 
       const getAllCategory = await Category.findAll();
+      const getAllArticle = await Article.findAll({
+        include: [
+          {
+            model: Category,
+            attributes: ['id', 'name'],
+          },
+          {
+            model: Account,
+            attributes: ['id', 'name', 'role'],
+          },
+        ],
+      });
 
       res.render('admin/artikel/view_article', {
         route: 'Article',
         getAllCategory,
+        getAllArticle,
         alert,
       });
     } catch (error) {
@@ -123,9 +137,144 @@ module.exports = {
   },
   addArticlePage: async (req, res) => {
     try {
+      const getCategory = await Category.findAll();
+
       res.render('admin/artikel/create_article', {
         route: 'Article',
+        getCategory,
       });
+    } catch (error) {
+      console.log(error);
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/article');
+    }
+  },
+  addArticle: async (req, res) => {
+    console.log('Files: ', req.file);
+    try {
+      const { categoryId, title, content } = req.body;
+      const articleId = uuid.v4();
+
+      await Article.create({
+        id: articleId,
+        categoryId,
+        title,
+        content,
+        image: `uploads/${req.file.filename}`,
+      });
+
+      req.flash('alertMessage', 'Berhasil tambah artikel');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/article');
+    } catch (error) {
+      console.log(error);
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/article');
+    }
+  },
+  detailArticlePage: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const getCategory = await Category.findAll();
+      const getArticle = await Article.findOne(
+        {
+          where: {
+            id: id,
+          },
+        },
+        {
+          include: [
+            {
+              model: Category,
+              attributes: ['id', 'name'],
+            },
+            {
+              model: Account,
+              attributes: ['id', 'name', 'role'],
+            },
+          ],
+        }
+      );
+
+      res.render('admin/artikel/edit_article', {
+        route: 'Article',
+        getArticle,
+        getCategory,
+      });
+    } catch (error) {
+      console.log(error);
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/article');
+    }
+  },
+  actionEditArticle: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { categoryId, title, content } = req.body;
+
+      const getArticle = await Article.findOne({
+        where: {
+          id: id,
+        },
+      });
+
+      if (req.file) {
+        await getArticle.update({
+          categoryId,
+          title,
+          content,
+          image: `uploads/${req.file.filename}`,
+        });
+      } else {
+        await getArticle.update({
+          categoryId,
+          title,
+          content,
+        });
+      }
+
+      req.flash('alertMessage', 'Berhasil update artikel');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/article');
+    } catch (error) {
+      console.log(error);
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/article');
+    }
+  },
+  actionDeleteArticle: async (req, res) => {
+    try {
+      const { id } = req.body;
+
+      const getArticle = await Article.findOne({
+        where: {
+          id: id,
+        },
+      });
+
+      if (!getArticle) {
+        req.flash('alertMessage', 'Artikel tidak ditemukan');
+        req.flash('alertStatus', 'danger');
+        return res.redirect('/article');
+      }
+
+      if (getArticle.image) {
+        fs.unlinkSync(`public/${getArticle.image}`);
+      }
+
+      await getArticle.destroy();
+
+      req.flash('alertMessage', 'Berhasil hapus artikel');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/article');
     } catch (error) {
       console.log(error);
       req.flash('alertMessage', `${error.message}`);

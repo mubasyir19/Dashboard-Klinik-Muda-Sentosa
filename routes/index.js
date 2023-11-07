@@ -5,6 +5,7 @@ const home = require('../app/Home/controller');
 const account = require('../app/Account/controller');
 const article = require('../app/Artikel/controller');
 const consultation = require('../app/Konsultasi/controller');
+const { uploadSingle } = require('../middleware/multer');
 
 // Login
 router.get('/', admin.viewLogin);
@@ -25,12 +26,20 @@ router.delete('/account/delete', account.actionDelete);
 
 // Article
 router.get('/article', article.articlePage);
-router.get('/article/add', article.addArticlePage);
+
+// Category Article
 router.get('/article/category/add', article.addCategoryPage);
 router.post('/article/category/add', article.addCategory);
 router.get('/article/category/edit/:id', article.editCategoryPage);
 router.put('/article/category/edit/:id', article.editCategory);
 router.delete('/article/category/delete', article.deleteCategory);
+
+// Article Action
+router.get('/article/add', article.addArticlePage);
+router.post('/article/add', uploadSingle, article.addArticle);
+router.get('/article/detail/:id', article.detailArticlePage);
+router.put('/article/detail/:id', uploadSingle, article.actionEditArticle);
+router.delete('/article/delete', article.actionDeleteArticle);
 
 // Consultations
 router.get('/consultation', consultation.ConsultationPage);
