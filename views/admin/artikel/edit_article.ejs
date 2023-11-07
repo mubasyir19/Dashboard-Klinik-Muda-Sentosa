@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item"><a href="/article">Akun</a></li>
+              <li class="breadcrumb-item"><a href="/article">Artikel</a></li>
               <li class="breadcrumb-item active">Detail Artikel</li>
             </ol>
           </div>
@@ -30,7 +30,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="/article/edit" method="post" enctype="multipart/form-data">
+                <form action="/article/detail/<%= getArticle.id %>?_method=PUT" method="post" enctype="multipart/form-data">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Pilih Kategori</label>

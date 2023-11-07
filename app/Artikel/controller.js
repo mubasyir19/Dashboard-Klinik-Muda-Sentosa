@@ -211,4 +211,41 @@ module.exports = {
       res.redirect('/article');
     }
   },
+  actionEditArticle: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { categoryId, title, content } = req.body;
+
+      const getArticle = await Article.findOne({
+        where: {
+          id: id,
+        },
+      });
+
+      if (req.file) {
+        await getArticle.update({
+          categoryId,
+          title,
+          content,
+          image: `uploads/${req.file.filename}`,
+        });
+      } else {
+        await getArticle.update({
+          categoryId,
+          title,
+          content,
+        });
+      }
+
+      req.flash('alertMessage', 'Berhasil update artikel');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/article');
+    } catch (error) {
+      console.log(error);
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/article');
+    }
+  },
 };
