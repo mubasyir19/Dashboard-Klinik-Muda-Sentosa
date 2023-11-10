@@ -5,6 +5,7 @@ const home = require('../app/Home/controller');
 const account = require('../app/Account/controller');
 const article = require('../app/Artikel/controller');
 const consultation = require('../app/Konsultasi/controller');
+const api = require('../app/API/controller');
 const { uploadSingle } = require('../middleware/multer');
 
 // Login
@@ -43,5 +44,9 @@ router.delete('/article/delete', article.actionDeleteArticle);
 
 // Consultations
 router.get('/consultation', consultation.ConsultationPage);
+
+// API
+router.get('/api/article', api.getAllAlrticles);
+router.get('/api/article/:id', api.getArticleById);
 
 module.exports = router;
