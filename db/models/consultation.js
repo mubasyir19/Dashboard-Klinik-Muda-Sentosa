@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       asker: DataTypes.STRING,
       question: DataTypes.STRING,
       dokterId: DataTypes.STRING,
-      answer: DataTypes.STRING,
+      answer: DataTypes.TEXT('long'),
     },
     {
       sequelize,
