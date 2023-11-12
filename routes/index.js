@@ -48,5 +48,8 @@ router.get('/consultation', consultation.ConsultationPage);
 // API
 router.get('/api/article', api.getAllAlrticles);
 router.get('/api/article/:id', api.getArticleById);
+router.post('/api/consultation', api.addQuestionConsultant);
+router.get('/api/consultation', api.getAllAnswerConsultation);
+router.get('/api/consultation/:id', api.getAllAnswerConsultationById);
 
 module.exports = router;
