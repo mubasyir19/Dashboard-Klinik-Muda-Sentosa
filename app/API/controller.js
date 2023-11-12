@@ -2,6 +2,7 @@ const { Article, Category, Account, Consultation } = require('../../db/models');
 const uuid = require('uuid');
 
 module.exports = {
+  // Article
   getAllAlrticles: async (req, res, next) => {
     try {
       const getData = await Article.findAll({
@@ -57,6 +58,7 @@ module.exports = {
       next(error);
     }
   },
+  // Consultation
   addQuestionConsultant: async (req, res, next) => {
     try {
       const { asker, question } = req.body;
