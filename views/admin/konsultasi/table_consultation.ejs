@@ -15,12 +15,24 @@
       <td><%= i + 1 %></td>
       <td><%= getConsultationData[i].asker %></td>
       <td><%= getConsultationData[i].question %></td>
-      <td><%= getConsultationData[i].answer %></td>
+      <td>
+        <% if (getConsultationData[i].answer === null) { %>
+        <span class="badge badge-danger">
+          <!-- <i class="fa-solid fa-xmark"></i> -->
+          Belum dijawab
+        </span>
+        <% } else {%>
+        <span class="badge badge-success">
+          <i class="fas fa-check"></i>
+          Sudah dijawab
+        </span>
+        <% } %>
+      </td>
       <td><%= getConsultationData[i]?.Account?.name %></td>
       <td>
-        <a href="/konsultasi/edit/<%= getConsultationData[i].id %>" class="btn btn-info btn-sm">
+        <a href="/consultation/detail/<%= getConsultationData[i].id %>" class="btn btn-info btn-sm">
           <i class="fas fa-pencil-alt"></i>
-          Ubah
+          Detail
         </a>
         <form action="/kelas/hapus/<%= getConsultationData[i].id %>?_method=DELETE" method="post">
           <a

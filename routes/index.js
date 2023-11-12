@@ -44,6 +44,8 @@ router.delete('/article/delete', article.actionDeleteArticle);
 
 // Consultations
 router.get('/consultation', consultation.ConsultationPage);
+router.get('/consultation/detail/:id', consultation.detailConsultationPage);
+router.put('/consultation/detail/:id', consultation.actionUpdateConsultation);
 
 // API
 router.get('/api/article', api.getAllAlrticles);
