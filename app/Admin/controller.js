@@ -15,7 +15,7 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Masalah`);
       req.flash('alertStatus', 'danger');
       res.redirect('/');
     }
@@ -89,6 +89,9 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
+      res.status(422).json({
+        message: 'Unable to process your request',
+      });
     }
   },
   // Action Logout
