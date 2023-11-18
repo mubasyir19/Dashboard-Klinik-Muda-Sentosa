@@ -43,6 +43,9 @@ module.exports = {
               status: checkUser.status,
             };
           }
+
+          // Response Success Login
+          res.redirect('/dashboard');
         } else {
           req.flash('alertMessage', `${error.message}`);
           req.flash('alertStatus', 'danger');
