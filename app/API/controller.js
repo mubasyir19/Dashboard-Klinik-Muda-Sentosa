@@ -2,6 +2,36 @@ const { Article, Category, Account, Consultation } = require('../../db/models');
 const uuid = require('uuid');
 
 module.exports = {
+  // Category
+  getAllCategories: async (req, res, next) => {
+    try {
+      const getCategories = await Category.findAll();
+
+      res.status(200).json({
+        message: 'success get categories',
+        data: getCategories,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+  getCategory: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const getCategory = await Category.findOne({
+        where: {
+          id: id,
+        },
+      });
+
+      res.status(200).json({
+        message: 'success get category',
+        data: getCategory,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
   // Article
   getAllAlrticles: async (req, res, next) => {
     try {

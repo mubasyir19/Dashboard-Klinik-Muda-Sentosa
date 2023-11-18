@@ -48,6 +48,8 @@ router.get('/consultation/detail/:id', consultation.detailConsultationPage);
 router.put('/consultation/detail/:id', consultation.actionUpdateConsultation);
 
 // API
+router.get('/api/category', api.getAllCategories);
+router.get('/api/category/:id', api.getCategory);
 router.get('/api/article', api.getAllAlrticles);
 router.get('/api/article/:id', api.getArticleById);
 router.post('/api/consultation', api.addQuestionConsultant);
