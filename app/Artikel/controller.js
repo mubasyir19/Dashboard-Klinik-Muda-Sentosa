@@ -31,9 +31,9 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Kesalahan, tidak bisa akses halaman`);
       req.flash('alertStatus', 'danger');
-      res.redirect('/article');
+      res.redirect('/dashboard');
     }
   },
   addCategoryPage: async (req, res) => {
@@ -43,7 +43,7 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Kesalahan, tidak bisa akses halaman`);
       req.flash('alertStatus', 'danger');
       res.redirect('/article');
     }
@@ -64,7 +64,7 @@ module.exports = {
       res.redirect('/article');
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Kesalahan, gagal menambah kategori`);
       req.flash('alertStatus', 'danger');
       res.redirect('/article');
     }
@@ -84,7 +84,7 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Kesalahan, tidak bisa akses halaman`);
       req.flash('alertStatus', 'danger');
       res.redirect('/article');
     }
@@ -108,7 +108,7 @@ module.exports = {
       res.redirect('/article');
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Kesalahan, gagal ubah kategori`);
       req.flash('alertStatus', 'danger');
       res.redirect('/article');
     }
@@ -130,7 +130,7 @@ module.exports = {
       res.redirect('/article');
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Kesalahan, gagal hapus kategori`);
       req.flash('alertStatus', 'danger');
       res.redirect('/article');
     }
@@ -145,7 +145,7 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Kesalahan, tidak bisa akses halaman`);
       req.flash('alertStatus', 'danger');
       res.redirect('/article');
     }
@@ -170,7 +170,7 @@ module.exports = {
       res.redirect('/article');
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Kesalahan, gagal tambah artikel`);
       req.flash('alertStatus', 'danger');
       res.redirect('/article');
     }
@@ -207,7 +207,7 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Kesalahan, tidak bisa akses halaman`);
       req.flash('alertStatus', 'danger');
       res.redirect('/article');
     }
@@ -244,7 +244,7 @@ module.exports = {
       res.redirect('/article');
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Kesalahan, gagal ubah artikel`);
       req.flash('alertStatus', 'danger');
       res.redirect('/article');
     }
@@ -277,7 +277,7 @@ module.exports = {
       res.redirect('/article');
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Kesalahan, gagal hapus artikel`);
       req.flash('alertStatus', 'danger');
       res.redirect('/article');
     }
