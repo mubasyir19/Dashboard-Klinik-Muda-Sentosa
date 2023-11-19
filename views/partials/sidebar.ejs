@@ -16,10 +16,22 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+        <% if (user.role === 'SuperAdmin') { %>
+          <img src="/images/superadmin-icon.png" alt="User Image" />
+        <% } else if (user.role === 'Admin') { %>
+          <img src="/images/admin-icon.png" alt="User Image" />
+        <% } else if (user.role === 'Dokter') { %>
+          <img src="/images/doctor-icon.png" alt="User Image" />
+        <% } else { %>
+          <img src="" alt="blank image" />
+        <% } %>
       </div>
-      <div class="info">
-        <a href="#" class="d-block">SuperAdmin</a>
+      <div class="info my-auto">
+        <% if (user.name) { %>
+          <a href="#" class="d-block"><%= user.name %></a>
+        <% } else { %>
+          <a href="#" class="d-block">User</a>
+        <% } %>
       </div>
     </div>
 

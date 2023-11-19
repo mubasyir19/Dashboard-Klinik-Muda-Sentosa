@@ -27,6 +27,7 @@ module.exports = {
         route: 'Article',
         getAllCategory,
         getAllArticle,
+        user: req.session.account,
         alert,
       });
     } catch (error) {
@@ -40,6 +41,7 @@ module.exports = {
     try {
       res.render('admin/artikel/create_category_article', {
         route: 'Article',
+        user: req.session.account,
       });
     } catch (error) {
       console.log(error);
@@ -80,6 +82,7 @@ module.exports = {
 
       res.render('admin/artikel/edit_category_article', {
         route: 'Article',
+        user: req.session.account,
         getCategory,
       });
     } catch (error) {
@@ -141,6 +144,7 @@ module.exports = {
 
       res.render('admin/artikel/create_article', {
         route: 'Article',
+        user: req.session.account,
         getCategory,
       });
     } catch (error) {
@@ -202,6 +206,7 @@ module.exports = {
 
       res.render('admin/artikel/edit_article', {
         route: 'Article',
+        user: req.session.account,
         getArticle,
         getCategory,
       });

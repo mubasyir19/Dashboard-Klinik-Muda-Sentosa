@@ -14,6 +14,7 @@ module.exports = {
 
       res.render('admin/account/view_account', {
         route: 'Account',
+        user: req.session.account,
         account,
         alert,
       });
@@ -29,6 +30,7 @@ module.exports = {
     try {
       res.render('admin/account/create_account', {
         route: 'Account',
+        user: req.session.account,
       });
     } catch (error) {
       console.log(error);
