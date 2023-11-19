@@ -19,6 +19,9 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
+      req.flash('alertMessage', `Terjadi Kesalahan, tidak bisa akses halaman`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/dashboard');
     }
   },
   // Add Account Page
@@ -29,6 +32,9 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
+      req.flash('alertMessage', `Terjadi Kesalahan, tidak bisa akses halaman`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/account');
     }
   },
   // Add Account action
@@ -55,7 +61,7 @@ module.exports = {
       res.redirect('/account');
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi kesalahan, gagal menambah akun`);
       req.flash('alertStatus', 'danger');
       res.redirect('/account');
     }
@@ -80,7 +86,7 @@ module.exports = {
       res.redirect('/account');
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi kesalahan, gagal mengubah status`);
       req.flash('alertStatus', 'danger');
       res.redirect('/account');
     }
@@ -102,7 +108,7 @@ module.exports = {
 
       res.redirect('/account');
     } catch (error) {
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi kesalahan, gagal menghapus akun`);
       req.flash('alertStatus', 'danger');
       res.redirect('/account');
     }

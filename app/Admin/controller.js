@@ -11,10 +11,11 @@ module.exports = {
 
       res.render('admin/login/view_login', {
         route: 'Login',
+        alert,
       });
     } catch (error) {
       console.log(error);
-      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertMessage', `Terjadi Masalah`);
       req.flash('alertStatus', 'danger');
       res.redirect('/');
     }
@@ -42,14 +43,21 @@ module.exports = {
               role: checkUser.role,
               status: checkUser.status,
             };
+
+            // Response Success Login
+            res.redirect('/dashboard');
+          } else {
+            req.flash('alertMessage', `Password Anda Salah`);
+            req.flash('alertStatus', 'danger');
+            res.redirect('/');
           }
         } else {
-          req.flash('alertMessage', `${error.message}`);
+          req.flash('alertMessage', `Akun Anda non-aktif`);
           req.flash('alertStatus', 'danger');
           res.redirect('/');
         }
       } else {
-        req.flash('alertMessage', `${error.message}`);
+        req.flash('alertMessage', `Username Anda belum terdaftar`);
         req.flash('alertStatus', 'danger');
         res.redirect('/');
       }
@@ -57,7 +65,7 @@ module.exports = {
       // Resopnse Error
       req.flash('alertMessage', `${error.message}`);
       req.flash('alertStatus', 'danger');
-      res.redirect('/login');
+      res.redirect('/');
     }
   },
   // SignUp
@@ -81,6 +89,14 @@ module.exports = {
       });
     } catch (error) {
       console.log(error);
+      res.status(422).json({
+        message: 'Unable to process your request',
+      });
     }
+  },
+  // Action Logout
+  actionLogout: (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
   },
 };
