@@ -18,6 +18,7 @@ module.exports = {
 
       res.render('admin/konsultasi/view_consultation', {
         route: 'Consultation',
+        user: req.session.account,
         alert,
         getConsultationData,
       });
@@ -46,6 +47,7 @@ module.exports = {
 
       res.render('admin/konsultasi/detail_consultation', {
         route: 'Consultation',
+        user: req.session.account,
         getConsultationData,
       });
     } catch (error) {
