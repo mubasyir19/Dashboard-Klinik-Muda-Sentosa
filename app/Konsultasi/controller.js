@@ -33,6 +33,8 @@ module.exports = {
     try {
       const { id } = req.params;
 
+      console.log(req.session.account);
+
       const getConsultationData = await Consultation.findOne({
         where: {
           id: id,
@@ -60,7 +62,7 @@ module.exports = {
   actionUpdateConsultation: async (req, res) => {
     try {
       const { id } = req.params;
-      const { asker, question, answer, doctorId } = req.body;
+      const { asker, question, answer } = req.body;
 
       const getConsultationData = await Consultation.findOne({
         where: {
@@ -68,13 +70,15 @@ module.exports = {
         },
       });
 
+      const doctorId = req.session.account.id;
+
       if (!getConsultationData) {
         req.flash('alertMessage', `Data tidak ditemukan`);
         req.flash('alertStatus', 'danger');
         res.redirect('/consultation');
       }
 
-      await getConsultationData.update({ asker, question, answer, doctorId });
+      await getConsultationData.update({ asker, question, answer, dokterId: doctorId });
 
       req.flash('alertMessage', 'Berhasil update konsultasi');
       req.flash('alertStatus', 'success');
