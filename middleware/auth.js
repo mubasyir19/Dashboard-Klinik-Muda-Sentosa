@@ -6,4 +6,16 @@ module.exports = {
       next();
     }
   },
+  validateRole: (role) => {
+    return (req, res, next) => {
+      const user = req.session.account;
+
+      if (user && user.role === role) {
+        next();
+      } else {
+        // res.status(403).send('Forbidden');
+        res.redirect('/dashboard');
+      }
+    };
+  },
 };

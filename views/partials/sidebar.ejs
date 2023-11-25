@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="index3.html" class="brand-link">
+  <a href="/dashboard" class="brand-link">
     <img
       src="/images/Logo-Klinik.png"
       alt="AdminLTE Logo"
@@ -28,7 +28,7 @@
       </div>
       <div class="info my-auto">
         <% if (user.name) { %>
-          <a href="#" class="d-block"><%= user.name %></a>
+          <a href="/dashboard" class="d-block"><%= user.name %></a>
         <% } else { %>
           <a href="#" class="d-block">User</a>
         <% } %>
@@ -46,12 +46,14 @@
             <p>Dashboard</p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="/account" class="nav-link <%= route === "Account" ? 'active': ' ' %>">
-            <i class="nav-icon fas fa-user-plus"></i>
-            <p>List Akun</p>
-          </a>
-        </li>
+        <% if (user && user.role === 'SuperAdmin') { %>
+          <li class="nav-item">
+            <a href="/account" class="nav-link <%= route === "Account" ? 'active': ' ' %>">
+              <i class="nav-icon fas fa-user-plus"></i>
+              <p>List Akun</p>
+            </a>
+          </li>
+        <% } %>
         <li class="nav-item">
           <a href="/article" class="nav-link <%= route === "Article" ? 'active': ' ' %>">
             <i class="nav-icon fas fa-newspaper"></i>

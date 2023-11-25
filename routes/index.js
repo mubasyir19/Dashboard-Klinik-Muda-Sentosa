@@ -5,9 +5,8 @@ const home = require('../app/Home/controller');
 const account = require('../app/Account/controller');
 const article = require('../app/Artikel/controller');
 const consultation = require('../app/Konsultasi/controller');
-const api = require('../app/API/controller');
 const { uploadSingle } = require('../middleware/multer');
-const { isLoginAccount } = require('../middleware/auth');
+const { isLoginAccount, validateRole } = require('../middleware/auth');
 
 // Authentication
 router.get('/', admin.viewLogin);
@@ -21,11 +20,11 @@ router.post('/signup', admin.actionSignUp);
 router.get('/dashboard', isLoginAccount, home.HomeDashboard);
 
 // Account
-router.get('/account', isLoginAccount, account.AccountPage);
-router.get('/account/add', isLoginAccount, account.addAccountPage);
-router.post('/account/add', isLoginAccount, account.actionAddAccount);
-router.put('/account/status/:id', isLoginAccount, account.actionStatus);
-router.delete('/account/delete', isLoginAccount, account.actionDelete);
+router.get('/account', isLoginAccount, validateRole('SuperAdmin'), account.AccountPage);
+router.get('/account/add', isLoginAccount, validateRole('SuperAdmin'), account.addAccountPage);
+router.post('/account/add', isLoginAccount, validateRole('SuperAdmin'), account.actionAddAccount);
+router.put('/account/status/:id', isLoginAccount, validateRole('SuperAdmin'), account.actionStatus);
+router.delete('/account/delete', isLoginAccount, validateRole('SuperAdmin'), account.actionDelete);
 
 // Article
 router.get('/article', isLoginAccount, article.articlePage);
@@ -48,14 +47,5 @@ router.delete('/article/delete', isLoginAccount, article.actionDeleteArticle);
 router.get('/consultation', isLoginAccount, consultation.ConsultationPage);
 router.get('/consultation/detail/:id', isLoginAccount, consultation.detailConsultationPage);
 router.put('/consultation/detail/:id', isLoginAccount, consultation.actionUpdateConsultation);
-
-// API
-router.get('/api/category', api.getAllCategories);
-router.get('/api/category/:id', api.getCategory);
-router.get('/api/article', api.getAllAlrticles);
-router.get('/api/article/:id', api.getArticleById);
-router.post('/api/consultation', api.addQuestionConsultant);
-router.get('/api/consultation', api.getAllAnswerConsultation);
-router.get('/api/consultation/:id', api.getAllAnswerConsultationById);
 
 module.exports = router;
