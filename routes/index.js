@@ -13,9 +13,6 @@ router.get('/', admin.viewLogin);
 router.post('/', admin.actionLogin);
 router.get('/logout', admin.actionLogout);
 
-//SignUp superadmin
-router.post('/signup', admin.actionSignUp);
-
 // Dashboard
 router.get('/dashboard', isLoginAccount, home.HomeDashboard);
 
