@@ -1,11 +1,11 @@
-const { account, article, category, Consultation } = require('../../db/models');
+const { account, article, category, consultation } = require('../../db/models');
 
 module.exports = {
   HomeDashboard: async (req, res) => {
     const dataAccount = await account.count();
     const dataArticle = await article.count();
     const dataCategory = await category.count();
-    const consultation = await Consultation.count({ where: { answer: null } });
+    const dataConsultation = await consultation.count({ where: { answer: null } });
 
     try {
       res.render('index', {
@@ -15,7 +15,7 @@ module.exports = {
           dataAccount,
           dataArticle,
           dataCategory,
-          consultation,
+          dataConsultation,
         },
       });
     } catch (error) {
