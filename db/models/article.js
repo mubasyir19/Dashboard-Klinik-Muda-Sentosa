@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Article.belongsTo(models.account, {
         foreignKey: 'adminId',
       });
-      Article.belongsTo(models.Category, {
+      Article.belongsTo(models.category, {
         foreignKey: 'categoryId',
       });
     }
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Article',
+      modelName: 'article',
     }
   );
   return Article;
