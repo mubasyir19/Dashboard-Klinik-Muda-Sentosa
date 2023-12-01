@@ -1,4 +1,4 @@
-const { Article, Category, Account } = require('../../db/models');
+const { Article, Category, account } = require('../../db/models');
 const uuid = require('uuid');
 const fs = require('fs');
 
@@ -17,7 +17,7 @@ module.exports = {
             attributes: ['id', 'name'],
           },
           {
-            model: Account,
+            model: account,
             attributes: ['id', 'name', 'role'],
           },
         ],
@@ -197,7 +197,7 @@ module.exports = {
               attributes: ['id', 'name'],
             },
             {
-              model: Account,
+              model: account,
               attributes: ['id', 'name', 'role'],
             },
           ],

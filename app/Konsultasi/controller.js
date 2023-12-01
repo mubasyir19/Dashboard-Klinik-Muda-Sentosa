@@ -1,4 +1,4 @@
-const { Consultation, Account } = require('../../db/models');
+const { Consultation, account } = require('../../db/models');
 
 module.exports = {
   ConsultationPage: async (req, res) => {
@@ -10,7 +10,7 @@ module.exports = {
       const getConsultationData = await Consultation.findAll({
         include: [
           {
-            model: Account,
+            model: account,
             attributes: ['id', 'name', 'role'],
           },
         ],
@@ -41,7 +41,7 @@ module.exports = {
         },
         include: [
           {
-            model: Account,
+            model: account,
             attributes: ['id', 'name', 'role'],
           },
         ],

@@ -1,4 +1,4 @@
-const { Account } = require('../../db/models');
+const { account } = require('../../db/models');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 
@@ -10,12 +10,12 @@ module.exports = {
       const alertStatus = req.flash('alertStatus');
       const alert = { message: alertMessage, status: alertStatus };
 
-      const account = await Account.findAll();
+      const dataAccount = await account.findAll();
 
       res.render('admin/account/view_account', {
         route: 'Account',
         user: req.session.account,
-        account,
+        dataAccount,
         alert,
       });
     } catch (error) {
@@ -49,7 +49,7 @@ module.exports = {
 
       const accountId = uuid.v4();
 
-      await Account.create({
+      await account.create({
         id: accountId,
         name,
         username,
@@ -73,7 +73,7 @@ module.exports = {
       const { id } = req.params;
       // const { status } = req.query;
 
-      const findAccount = await Account.findOne({
+      const findAccount = await account.findOne({
         where: {
           id: id,
         },
@@ -97,7 +97,7 @@ module.exports = {
     try {
       const { id } = req.body;
 
-      const findAccount = await Account.findOne({
+      const findAccount = await account.findOne({
         where: {
           id: id,
         },
