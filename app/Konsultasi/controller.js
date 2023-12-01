@@ -1,4 +1,4 @@
-const { Consultation, Account } = require('../../db/models');
+const { consultation, account } = require('../../db/models');
 
 module.exports = {
   ConsultationPage: async (req, res) => {
@@ -7,10 +7,10 @@ module.exports = {
       const alertStatus = req.flash('alertStatus');
       const alert = { message: alertMessage, status: alertStatus };
 
-      const getConsultationData = await Consultation.findAll({
+      const getConsultationData = await consultation.findAll({
         include: [
           {
-            model: Account,
+            model: account,
             attributes: ['id', 'name', 'role'],
           },
         ],
@@ -35,13 +35,13 @@ module.exports = {
 
       console.log(req.session.account);
 
-      const getConsultationData = await Consultation.findOne({
+      const getConsultationData = await consultation.findOne({
         where: {
           id: id,
         },
         include: [
           {
-            model: Account,
+            model: account,
             attributes: ['id', 'name', 'role'],
           },
         ],
@@ -64,7 +64,7 @@ module.exports = {
       const { id } = req.params;
       const { asker, question, answer } = req.body;
 
-      const getConsultationData = await Consultation.findOne({
+      const getConsultationData = await consultation.findOne({
         where: {
           id: id,
         },

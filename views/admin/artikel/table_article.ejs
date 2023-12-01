@@ -12,9 +12,9 @@
     <% for(let i = 0; i < getAllArticle.length; i++) { %>
     <tr>
       <td><%= i + 1 %></td>
-      <td><%= getAllArticle[i]?.Category?.name %></td>
+      <td><%= getAllArticle[i]?.category?.name %></td>
       <td><%= getAllArticle[i].title %></td>
-      <td><%= getAllArticle[i]?.Account?.name %></td>
+      <td><%= getAllArticle[i]?.account?.name %></td>
       <td>
         <a href="/article/detail/<%= getAllArticle[i].id %>" class="btn btn-success btn-sm">
           <i class="fa fa-clipboard"></i>

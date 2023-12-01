@@ -1,4 +1,4 @@
-const { Article, Category, Account } = require('../../db/models');
+const { article, category, account } = require('../../db/models');
 const uuid = require('uuid');
 const fs = require('fs');
 
@@ -9,15 +9,15 @@ module.exports = {
       const alertStatus = req.flash('alertStatus');
       const alert = { message: alertMessage, status: alertStatus };
 
-      const getAllCategory = await Category.findAll();
-      const getAllArticle = await Article.findAll({
+      const getAllCategory = await category.findAll();
+      const getAllArticle = await article.findAll({
         include: [
           {
-            model: Category,
+            model: category,
             attributes: ['id', 'name'],
           },
           {
-            model: Account,
+            model: account,
             attributes: ['id', 'name', 'role'],
           },
         ],
@@ -55,7 +55,7 @@ module.exports = {
       const { name } = req.body;
       const categoryId = uuid.v4();
 
-      await Category.create({
+      await category.create({
         id: categoryId,
         name,
       });
@@ -74,7 +74,7 @@ module.exports = {
   editCategoryPage: async (req, res) => {
     try {
       const { id } = req.params;
-      const getCategory = await Category.findOne({
+      const getCategory = await category.findOne({
         where: {
           id,
         },
@@ -97,7 +97,7 @@ module.exports = {
       const { id } = req.params;
       const { name } = req.body;
 
-      const findCategory = await Category.findOne({
+      const findCategory = await category.findOne({
         where: {
           id: id,
         },
@@ -119,7 +119,7 @@ module.exports = {
   deleteCategory: async (req, res) => {
     try {
       const { id } = req.body;
-      const getCategory = await Category.findOne({
+      const getCategory = await category.findOne({
         where: {
           id,
         },
@@ -140,7 +140,7 @@ module.exports = {
   },
   addArticlePage: async (req, res) => {
     try {
-      const getCategory = await Category.findAll();
+      const getCategory = await category.findAll();
 
       res.render('admin/artikel/create_article', {
         route: 'Article',
@@ -160,12 +160,15 @@ module.exports = {
       const { categoryId, title, content } = req.body;
       const articleId = uuid.v4();
 
-      await Article.create({
+      const admin = req.session.account.id;
+
+      await article.create({
         id: articleId,
         categoryId,
         title,
         content,
         image: `uploads/${req.file.filename}`,
+        adminId: admin,
       });
 
       req.flash('alertMessage', 'Berhasil tambah artikel');
@@ -183,8 +186,8 @@ module.exports = {
     try {
       const { id } = req.params;
 
-      const getCategory = await Category.findAll();
-      const getArticle = await Article.findOne(
+      const getCategory = await category.findAll();
+      const getArticle = await article.findOne(
         {
           where: {
             id: id,
@@ -193,11 +196,11 @@ module.exports = {
         {
           include: [
             {
-              model: Category,
+              model: category,
               attributes: ['id', 'name'],
             },
             {
-              model: Account,
+              model: account,
               attributes: ['id', 'name', 'role'],
             },
           ],
@@ -222,7 +225,7 @@ module.exports = {
       const { id } = req.params;
       const { categoryId, title, content } = req.body;
 
-      const getArticle = await Article.findOne({
+      const getArticle = await article.findOne({
         where: {
           id: id,
         },
@@ -258,7 +261,7 @@ module.exports = {
     try {
       const { id } = req.body;
 
-      const getArticle = await Article.findOne({
+      const getArticle = await article.findOne({
         where: {
           id: id,
         },

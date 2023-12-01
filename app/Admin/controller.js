@@ -1,4 +1,4 @@
-const { Account } = require('../../db/models');
+const { account } = require('../../db/models');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
     try {
       const { username, password } = req.body;
 
-      const checkUser = await Account.findOne({
+      const checkUser = await account.findOne({
         where: {
           username: username,
         },
@@ -76,7 +76,7 @@ module.exports = {
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(password, salt);
 
-      const result = await Account.create({
+      const result = await account.create({
         name,
         username,
         role,

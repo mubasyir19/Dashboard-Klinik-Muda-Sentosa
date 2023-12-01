@@ -10,24 +10,24 @@
     </tr>
   </thead>
   <tbody>
-    <% for(let i = 0; i < account.length; i++) { %>
+    <% for(let i = 0; i < dataAccount.length; i++) { %>
     <tr>
       <td><%= i + 1 %></td>
-      <td><%= account[i].name %></td>
-      <td><%= account[i].username %></td>
-      <td><%= account[i].role %></td>
+      <td><%= dataAccount[i].name %></td>
+      <td><%= dataAccount[i].username %></td>
+      <td><%= dataAccount[i].role %></td>
       <td>
-        <% if (account[i].status === 'Aktif') { %>
-        <span class="badge badge-success"> <%= account[i].status %> </span>
+        <% if (dataAccount[i].status === 'Aktif') { %>
+        <span class="badge badge-success"> <%= dataAccount[i].status %> </span>
         <% } else {%>
-        <span class="badge badge-danger"> <%= account[i].status %> </span>
+        <span class="badge badge-danger"> <%= dataAccount[i].status %> </span>
         <% } %>
       </td>
       <td class="d-flex">
-        <form action="/account/status/<%= account[i].id %>?_method=PUT" method="post" style="display: inline-block">
+        <form action="/account/status/<%= dataAccount[i].id %>?_method=PUT" method="post" style="display: inline-block">
           <button class="btn btn-primary btn-sm">
             <i class="fas fa-folder mr-1"></i>
-            <% if(account[i].status === 'Non-Aktif') { %> Aktifkan <% } else { %> Non-Aktifkan <% } %>
+            <% if(dataAccount[i].status === 'Non-Aktif') { %> Aktifkan <% } else { %> Non-Aktifkan <% } %>
           </button>
         </form>
         <!-- <form action="/account/delete/<%#= kategori[i].id %>?_method=DELETE" method="post" class="ml-1"> -->
@@ -35,7 +35,7 @@
           href="javascript:void()"
           type="button"
           class="btn btn-danger btn-sm ml-1 button-delete"
-          data-id="<%= account[i].id %>"
+          data-id="<%= dataAccount[i].id %>"
         >
           <i class="fas fa-trash-alt"></i>
           Hapus
