@@ -48,8 +48,15 @@
 </div>
 
 <!-- Validasi Hapus -->
-<%#- include("./validasi.ejs") %>
+<%- include("./validation.ejs") %>
 <!--   Footer   -->
 <%- include('../../partials/footer.ejs') %>
 <!--   Core JS Files   -->
 <%- include('../../partials/js.ejs') %>
+<script>
+  $('.table-consultation').on('click', '.button-delete-consultation', function () {
+    let id = $(this).data('id');
+    $('#delete-modal-consultation').modal('show');
+    $('.id').val(id);
+  });
+</script>

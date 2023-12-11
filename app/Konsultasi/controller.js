@@ -91,4 +91,33 @@ module.exports = {
       res.redirect('/consultation');
     }
   },
+  actionDeleteConsultation: async (req, res) => {
+    try {
+      const { id } = req.body;
+
+      const getConsultation = await consultation.findOne({
+        where: {
+          id: id,
+        },
+      });
+
+      if (!getConsultation) {
+        req.flash('alertMessage', 'Konsultasi tidak ditemukan');
+        req.flash('alertStatus', 'danger');
+        return res.redirect('/consultation');
+      }
+
+      await getConsultation.destroy();
+
+      req.flash('alertMessage', 'Berhasil hapus konsultasi');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/consultation');
+    } catch (error) {
+      console.log(error);
+      req.flash('alertMessage', `Terjadi Kesalahan, gagal hapus konsultasi`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/consultation');
+    }
+  },
 };

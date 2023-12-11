@@ -44,5 +44,6 @@ router.delete('/article/delete', isLoginAccount, article.actionDeleteArticle);
 router.get('/consultation', isLoginAccount, consultation.ConsultationPage);
 router.get('/consultation/detail/:id', isLoginAccount, consultation.detailConsultationPage);
 router.put('/consultation/detail/:id', isLoginAccount, consultation.actionUpdateConsultation);
+router.delete('/consultation/delete', isLoginAccount, consultation.actionDeleteConsultation);
 
 module.exports = router;
